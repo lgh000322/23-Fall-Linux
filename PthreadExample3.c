@@ -7,11 +7,13 @@ void *TaskCode(void *argument)
 {
 	int tid;
 	tid=*((int*)argument);
-	pthread_mutex_lock(&mtx);
+	int my_acc=0;
 	for(int i=0;i<1000000;i++)
 	{
-		acc+=1;
+		my_acc+=1;
 	}
+	pthread_mutex_lock(&mtx);
+	acc=acc+my_acc;
 	pthread_mutex_unlock(&mtx);
 	return NULL;
 }
