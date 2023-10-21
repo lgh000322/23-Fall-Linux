@@ -40,6 +40,8 @@ void sinx_talyor(int num_elements,int terms,double* x,double* result)
 			}
 			result[i]=value;
 			sprintf(message,"%lf",result[i]);
+			length=strlen(message)+1;
+			write(p_fd[1],message,length);
 			exit(i);	
 		}
 		else close(p_fd[1]);
@@ -51,8 +53,7 @@ void sinx_talyor(int num_elements,int terms,double* x,double* result)
 		wait(&stat);
 		int child_id=stat>>8;
 		read(fd[2*child_id],line,MAXLINE);
-		double res=atof(line);
-		result[child_id]=res;
+		result[child_id]=atof(line);
 
 	}
 }
