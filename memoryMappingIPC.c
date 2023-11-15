@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[])
 {
-	int fd;
+	int fd,pid;
 	caddr_t addr;
 	struct stat statbuf;
 	if(argc!=2)
@@ -28,13 +28,30 @@ int main(int argc, char* argv[])
 
 	addr=mmap(NULL,statbuf.st_size,PROT_READ|PROT_WRITE,MAP_SHARED,fd,(off_t)0);
 
+
 	if(addr==MAP_FAILED){
 		perror("mmap");
 		exit(1);
 	}
 	close(fd);
 
-	printf("%s",addr);
+	switch(pid=fork()){
+		case 0:
+			printf("1.Child Process:addr=%s",addr);
+			sleep(1);
+			((char*)addr)[0]='x';
+			printf("2.Child Process:addr=%s",addr);
+			sleep(2);
+			printf("3.Child Process: addr=%s",addr);
+			exit(1);
+		default:
+			printf("1.Parent process:addr=%s",addr);
+			sleep(2);
+			printf("2.Parent Prorcess: addr=%s",addr);
+			((char*)addr)[1]='y';
+			printf("3. Parent Process:addr=%s",addr);
+			break;
+	}
 
 	if(munmap(addr,statbuf.st_size)==-1){
 		perror("munmap");
