@@ -1,0 +1,16 @@
+[Client1]: This is client1
+
+[Client2]: This is client2
+
+[Client1]: Sending message in a row Test by Client1
+
+[Client1]: again
+
+[Client1]: Sending Message in a row Test by Client1
+
+[Client1]: again
+
+[Client2]: send message
+
+[Client2]: plz
+
