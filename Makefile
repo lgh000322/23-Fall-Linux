@@ -1,8 +1,7 @@
-exe: main.o copy.o
-	gcc -o exe main.o copy.o
+obj-m=hello.o
 
-main.o: main.c copy.h
-	gcc -c main.c
+KDIR:= /home/lgh/WSL2-Linux-Kernel-linux-msft-wsl-5.15.133.1
+PWD:= ${shell pwd}
 
-copy.o: copy.c
-	gcc -c copy.c
+default:
+	make -C $(KDIR) M=$(PWD) modules  
