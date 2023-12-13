@@ -1,8 +1,8 @@
-#include <linux.init.h>
+#include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/sched.h>
-#include <linux.pid.h>
+#include <linux/pid.h>
 
 static int init_logpid(void){
 	printk(KERN_ALERT "Hello.\n");
@@ -10,7 +10,7 @@ static int init_logpid(void){
 }
 
 static void exit_logpid(void){
-	printk(KERN_ALERT "BYE\N");
+	printk(KERN_ALERT "BYE\n");
 }
 
 void log_pid(struct pid* p){
